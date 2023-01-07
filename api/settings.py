@@ -30,6 +30,11 @@ SECRET_KEY = "ch$edgyfg8ak^zm5pdsk#g0#=h2j^4da=zq2j$6+!+r=ar_8^t"
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CORS_ALLOWED_ORIGINS = [ 'http://localhost:3000', ]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
 
 
 # Application definition
@@ -41,19 +46,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_filters',
     'corsheaders',
     'rest_framework',
-    'userpanel',
+    'adminpanel',
     'base',
     'userpanel',
 ]
 
 AUTH_USER_MODEL = "base.User"
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-72cf.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'https://shishya-backend-production.up.railway.app/']
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -61,7 +66,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -147,7 +151,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
