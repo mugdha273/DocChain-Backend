@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'rest_framework',
-    'adminpanel',
+    'userpanel',
     'base',
     'userpanel',
 ]
