@@ -27,12 +27,6 @@ class DocumentModel(models.Model):
     def __str__(self):
         return self.user.email
 
-class Adhaar(models.Model):
-    adhaar_no = models.CharField(max_length=255, blank=True)
-    phone_no = models.CharField(max_length=15, blank=True)
-    dob = models.DateField(auto_now_add=True, blank=True)
-    gender = models.CharField(max_length=255, blank=True)
-    
 class AdhaarFile(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)

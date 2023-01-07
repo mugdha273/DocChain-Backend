@@ -76,7 +76,7 @@ class FormView(viewsets.ModelViewSet):
     @action(detail=False, methods=['post', 'get'],url_path='job')
     def job(self, request, format=None):
         if request.method == 'GET':
-            job= Job.objects.filter(owner= request.user)
+            job= Job.objects.all()
             form_data = self.get_serializer_class()(job, many=True).data
             return Response(form_data,
                 status = status.HTTP_200_OK)
@@ -90,7 +90,7 @@ class FormView(viewsets.ModelViewSet):
     @action(detail=False, methods=['post', 'get'],url_path='college')
     def college(self, request, format=None):
         if request.method == 'GET':
-            form = Form.objects.filter(owner= request.user)
+            form = Form.objects.all()
             form_data = self.get_serializer_class()(form, many=True).data
             return Response(form_data,status = status.HTTP_200_OK)
         

@@ -91,12 +91,6 @@ class PreVerfiedQuestionTypeSerializer(serializers.ModelSerializer):
             'id','form','title','answer','technique',
         ]
 
-class AdhaarSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Adhaar
-        fields = '__all__'
-        
 class JobAnswerSerializer(serializers.ModelSerializer):
     
     class Meta:
