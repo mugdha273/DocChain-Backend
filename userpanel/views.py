@@ -376,9 +376,52 @@ class UploadDocumentViewset(viewsets.ModelViewSet):
     def nationality(self, request, format=None, **kwargs):
         return self.handle_action('nationality', request)
     
-# class RetrieveDocument(views.APIView):
+class RetrieveDocument(views.APIView):
     
-#     def get(self,request):
+    def post(self,request):
+        data = request.data
+        private_key = "hey"
+        if SSC.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = SSC.Private_key
+        elif HSC.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = HSC.Private_key
+        elif AdhaarFile.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = AdhaarFile.Private_key
+        elif MigrationCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = MigrationCertificate.Private_key
+        elif JEEmarksheet.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = JEEmarksheet.Private_key
+        elif JEEallotmentLetter.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = JEEallotmentLetter.Private_key
+        elif DisabilityCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = DisabilityCertificate.Private_key
+        elif BirthCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = BirthCertificate.Private_key
+        elif DomicileCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = DomicileCertificate.Private_key
+        elif PAN.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = PAN.Private_key
+        elif Passport.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = Passport.Private_key
+        elif SportsCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = SportsCertificate.Private_key
+        elif TransferCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = TransferCertificate.Private_key
+        elif CasteCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = CasteCertificate.Certificate
+        elif IncomeCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = IncomeCertificate.objects.get(user = data['user']).Private_key
+        elif MedicalCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = MedicalCertificate.Private_key
+        elif NationalityCertificate.objects.get(user = data['user']).IPFS_Key == data['IPFS_Key']:
+            private_key = NationalityCertificate.Private_key
+            
+        doc = requests.get(url = "https://"+data['IPFS_Key']+".ipfs.w3s.link").json()
+        return_data = decryptDoc(doc, private_key)
+            
+        return Response(return_data['decryptedDoc'], status=status.HTTP_200_OK)      
+    
+
         
     
 
