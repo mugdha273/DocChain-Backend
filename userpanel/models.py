@@ -50,3 +50,5 @@ class JobSubmitTextQuestion(models.Model):
     question = models.ForeignKey(JobQuestion, on_delete=models.CASCADE)
     answer = models.TextField(null=False, blank=True)
     
+
+    

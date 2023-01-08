@@ -30,7 +30,8 @@ class DocumentModel(models.Model):
 class AdhaarFile(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -45,7 +46,8 @@ class AdhaarFile(models.Model):
 class SSC(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -61,7 +63,8 @@ class SSC(models.Model):
 class HSC(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -75,7 +78,8 @@ class HSC(models.Model):
     
 class MigrationCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -90,7 +94,8 @@ class MigrationCertificate(models.Model):
     
 class JEEmarksheet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -104,7 +109,8 @@ class JEEmarksheet(models.Model):
         
 class JEEallotmentLetter(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -119,7 +125,8 @@ class JEEallotmentLetter(models.Model):
     
 class DisabilityCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -134,7 +141,8 @@ class DisabilityCertificate(models.Model):
     
 class DomicileCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -149,7 +157,8 @@ class DomicileCertificate(models.Model):
     
 class PAN(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -164,7 +173,8 @@ class PAN(models.Model):
     
 class BirthCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
@@ -178,7 +188,8 @@ class BirthCertificate(models.Model):
     
 class Passport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -192,9 +203,10 @@ class Passport(models.Model):
     
 class SportsCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
-
+    
     def save(self, *args, **kwargs):
         if self.pk is None:
             super().save(*args, **kwargs)
@@ -206,7 +218,8 @@ class SportsCertificate(models.Model):
     
 class TransferCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -220,7 +233,8 @@ class TransferCertificate(models.Model):
     
 class CasteCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -234,7 +248,8 @@ class CasteCertificate(models.Model):
     
 class  IncomeCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
   
     def save(self, *args, **kwargs):
@@ -248,7 +263,8 @@ class  IncomeCertificate(models.Model):
     
 class  MedicalCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -262,7 +278,8 @@ class  MedicalCertificate(models.Model):
     
 class  NationalityCertificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    PrivateKey= models.CharField(max_length=500, blank=True)
+    IPFS_Key= models.CharField(max_length=500, blank=True)
+    Private_key= models.CharField(max_length=500, blank=True)
     isVerified= models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):

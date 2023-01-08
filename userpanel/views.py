@@ -1,5 +1,5 @@
 from django.http import Http404
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions, status, views
 from rest_framework.response import Response
 from rest_framework import viewsets
 
@@ -9,6 +9,9 @@ from userpanel.models import *
 from userpanel.serializers import *
 from rest_framework.decorators import action
 from adminpanel.serializers import *
+from .utils import decryptDoc, encryptDoc
+import requests
+import os
 
 # Create your views here.
 
@@ -244,13 +247,12 @@ class SubmitPreVerifiedQuestionView(viewsets.ModelViewSet):
         submitpre.question = JobQuestion.objects.get(id = data['question'])
         submitpre.save()
         return Response(data, status=status.HTTP_201_CREATED)
-        
-    
+       
     
 class UploadDocumentViewset(viewsets.ModelViewSet):
     
     permission_classes = [permissions.IsAuthenticated]
-    
+    queryset = DocumentModel.objects.all()
     def get_serializer_class(self):
         if hasattr(self, 'action_serializers'):
             return self.action_serializers.get(self.action, self.serializer_class)
@@ -279,13 +281,30 @@ class UploadDocumentViewset(viewsets.ModelViewSet):
     
     def handle_action(self, action_name, request):
         serializer_class = self.action_serializers.get(action_name)
-        serializer = serializer_class(data=request.data)
+        data = request.data
+        
+        file = request.FILES['file']
+        file = file.read()
+        # print(file)
+        encoded_data = encryptDoc(file)
+        # print(encoded_data['ecryptedDoc'])
+        token = os.environ.get('token') 
+        ipfs_data = requests.post(url = 'https://api.web3.storage/upload',
+                                  headers={'Authorization': 'Bearer ' + token},
+                                  data = encoded_data['ecryptedDoc']).json()
+        
+        data['Private_key'] = encoded_data['privateKey']
+        data['IPFS_Key'] = ipfs_data['cid']
+        serializer = serializer_class(data=data)
+        
         model_name = serializer.Meta.model
         if request.method == 'GET':
             serializer = serializer_class(model_name.objects.all(), many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
+        
+
         if serializer.is_valid():
-            serializer.save()
+            # serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -356,4 +375,10 @@ class UploadDocumentViewset(viewsets.ModelViewSet):
     @action(detail=False, methods=['post', 'get'], url_path='nationality')
     def nationality(self, request, format=None, **kwargs):
         return self.handle_action('nationality', request)
+    
+# class RetrieveDocument(views.APIView):
+    
+#     def get(self,request):
+        
+    
 
